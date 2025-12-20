@@ -1,0 +1,132 @@
+IP Address
+
+An IPv4 address has 32 bits, split into 4 octets (8 bits each).
+8 bits → 2⁸ = 256 values (0–255)
+
+192.168.10.1
+192  = 11000000
+168  = 10101000
+1    = 00000001
+10   = 00001010
+11000000.10101000.00000001.00001010
+
+Network ID vs Host ID
+Every IPv4 address is split into:
+Network portion → identifies the network
+Host portion → identifies the device
+
+Example:
+192.168.1.10/24
+Binary:
+Network: 11000000.10101000.00000001
+Host:    00001010
+
+Two special host values:
+All 0s → Network address (192.168.1.0)
+All 1s → Broadcast address (192.168.1.255)
+These cannot be assigned to devices.
+
+5. Subnet masks (the knife that cuts networks)
+A subnet mask tells us:
+“Which bits belong to the network?”
+
+Example:
+255.255.255.0
+
+Binary:
+11111111.11111111.11111111.00000000
+
+That’s a /24 network:
+24 network bits
+8 host bits
+Rule of sanity
+Network bits → continuous 1s
+Host bits → continuous 0s
+No mixing allowed (nature is strict here)
+
+6. CIDR (Classless Inter-Domain Routing)
+CIDR killed rigid classes and replaced them with logic.
+Notation:
+192.168.1.0/26
+
+Meaning:
+26 bits → network
+6 bits → host
+Hosts = 2⁶ − 2 = 62
+Binary mask:
+11111111.11111111.11111111.11000000
+
+CIDR lets you design networks precisely instead of wasting addresses like it’s 1995.
+
+7. Public vs Private IP addresses
+Some IP ranges are not routable on the internet.
+Private ranges:
+10.0.0.0/8
+172.16.0.0 – 172.31.255.255
+192.168.0.0/16
+These live behind NAT (your router plays translator between private and public worlds).
+
+8. Loopback & special addresses
+127.0.0.1 → loopback (talking to yourself)
+0.0.0.0 → unspecified / default route
+255.255.255.255 → limited broadcast
+Loopback is a philosophical gem:
+the network equivalent of thinking aloud.
+
+9. Binary math you must be comfortable with
+Subnetting lives and dies on powers of two.
+
+Bits	Values
+1	2
+2	4
+3	8
+4	16
+5	32
+6	64
+7	128
+8	256
+
+Usable hosts formula:
+2^(host bits) - 2
+
+Why minus 2?
+One for network address
+One for broadcast
+
+
+Class A
+Range: 1.0.0.0 – 126.255.255.255
+First bit: 0
+Network bits: 8
+Host bits: 24
+Hosts per network: 16,777,214
+0xxxxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx
+
+
+Class B
+Range: 128.0.0.0 – 191.255.255.255
+First bits: 10
+Network bits: 16
+Host bits: 16
+Hosts per network: 65,534
+Binary pattern:
+10xxxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx
+
+Class C
+Range: 192.0.0.0 – 223.255.255.255
+First bits: 110
+Network bits: 24
+Host bits: 8
+Hosts per network: 254
+Binary pattern:
+110xxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx
+
+Class D (Multicast)
+Range: 224.0.0.0 – 239.255.255.255
+First bits: 1110
+Used for multicast, not host addressing
+
+Class E (Experimental)
+Range: 240.0.0.0 – 255.255.255.255
+First bits: 1111
+Reserved, not used in normal networking
