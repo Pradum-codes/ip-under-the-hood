@@ -130,3 +130,11 @@ Class E (Experimental)
 Range: 240.0.0.0 – 255.255.255.255
 First bits: 1111
 Reserved, not used in normal networking
+
+TO be ADDED
+Subnets :- 
+FLSM and VLSM
+
+
+
+
